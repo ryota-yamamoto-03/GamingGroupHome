@@ -36,7 +36,7 @@ const FLOOR_2F: Area[] = [
   { id: "r8", label: "居室 8", sub: "洋室 6帖", x: 595, y: 20, w: 185, h: 165, href: "#room", accent: "#8b5cf6" },
   { id: "r9", label: "居室 9", sub: "洋室 6帖", x: 20, y: 255, w: 175, h: 245, href: "#room", accent: "#8b5cf6" },
   { id: "r10", label: "居室 10", sub: "洋室 6帖", x: 205, y: 255, w: 175, h: 245, href: "#room", accent: "#8b5cf6" },
-  { id: "free", label: "フリースペース", sub: "ミニ卓球・本棚", x: 410, y: 255, w: 175, h: 245, accent: "#34d399" },
+  { id: "free", label: "フリースペース", sub: "ミニ卓球・本棚", x: 410, y: 255, w: 175, h: 245, href: "#freespace", accent: "#34d399" },
   { id: "wc2", label: "トイレ・洗面", x: 595, y: 255, w: 185, h: 245, accent: "#38bdf8" },
 ];
 

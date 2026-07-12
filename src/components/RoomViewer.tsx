@@ -12,16 +12,26 @@ const LivingRoomScene = dynamic(() => import("./three/LivingRoomScene"), {
 const PrivateRoomScene = dynamic(() => import("./three/PrivateRoomScene"), {
   ssr: false,
 });
+const FreeSpaceScene = dynamic(() => import("./three/FreeSpaceScene"), {
+  ssr: false,
+});
+
+const SCENES = {
+  living: LivingRoomScene,
+  room: PrivateRoomScene,
+  free: FreeSpaceScene,
+} as const;
 
 function ViewerFrame({
   scene,
   hint,
   cta,
 }: {
-  scene: "living" | "room";
+  scene: keyof typeof SCENES;
   hint: string;
   cta: string;
 }) {
+  const SceneComponent = SCENES[scene];
   const [active, setActive] = useState(false);
 
   return (
@@ -34,11 +44,7 @@ function ViewerFrame({
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.6rem] bg-gradient-to-b from-sky-50 to-sky-100 sm:aspect-[16/9]">
         {active ? (
-          scene === "living" ? (
-            <LivingRoomScene />
-          ) : (
-            <PrivateRoomScene />
-          )
+          <SceneComponent />
         ) : (
           <button
             onClick={() => setActive(true)}
@@ -115,6 +121,26 @@ export function RoomSection() {
           scene="room"
           hint="ドラッグで360°見渡せます（お部屋の中に立っている視点）"
           cta="個室を360°内覧する"
+        />
+      </div>
+    </section>
+  );
+}
+
+export function FreeSpaceSection() {
+  return (
+    <section id="freespace" className="relative py-24 sm:py-32">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-emerald-50/70 to-transparent" />
+      <div className="mx-auto max-w-6xl px-6">
+        <SectionHeading
+          eyebrow="3D Virtual Tour — 2F Free Space"
+          title="2Fフリースペースも、3Dで内覧。"
+          lead="ゲームにちょっと疲れたら、2階のフリースペースへ。ミニ卓球台でひと汗かいたり、マンガやボードゲームが並ぶ本棚のそばでのんびりしたり。ドラッグで自由に回転できます。"
+        />
+        <ViewerFrame
+          scene="free"
+          hint="ドラッグで回転 / ピンチ・スクロールでズーム"
+          cta="2Fフリースペースを3D内覧する"
         />
       </div>
     </section>

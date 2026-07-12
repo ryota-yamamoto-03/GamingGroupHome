@@ -3,7 +3,11 @@ import ParticleField from "@/components/ParticleField";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Concept from "@/components/Concept";
-import { LivingSection, RoomSection } from "@/components/RoomViewer";
+import {
+  LivingSection,
+  RoomSection,
+  FreeSpaceSection,
+} from "@/components/RoomViewer";
 import FloorPlan from "@/components/FloorPlan";
 import DayTimeline from "@/components/DayTimeline";
 import Facilities from "@/components/Facilities";
@@ -23,6 +27,7 @@ export default function Home() {
         <Concept />
         <LivingSection />
         <RoomSection />
+        <FreeSpaceSection />
         <FloorPlan />
         <DayTimeline />
         <Facilities />

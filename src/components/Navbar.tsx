@@ -9,6 +9,7 @@ const LINKS = [
   { href: "#concept", label: "コンセプト" },
   { href: "#living", label: "共用リビング" },
   { href: "#room", label: "個室" },
+  { href: "#freespace", label: "フリースペース" },
   { href: "#floorplan", label: "間取り" },
   { href: "#day", label: "一日の流れ" },
   { href: "#facilities", label: "設備" },
