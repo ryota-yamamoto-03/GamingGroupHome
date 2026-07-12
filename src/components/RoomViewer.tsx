@@ -90,7 +90,7 @@ export function LivingSection() {
         <SectionHeading
           eyebrow="3D Virtual Tour — Living"
           title="共用リビングを、3Dで内覧。"
-          lead="ここが施設の最大の魅力。大型テレビ・ゲーミングデスクトップPC・PS5・Switch が揃う、白と木目の明るいリビング。ドラッグで自由に回転して、お部屋の空気を感じてください。"
+          lead="ここが施設の最大の魅力。大型テレビ・ゲーミングデスクトップPC 5台・PS5・Switch が揃う、白と木目の明るいリビング。ドラッグで自由に回転して、お部屋の空気を感じてください。"
         />
         <ViewerFrame
           scene="living"

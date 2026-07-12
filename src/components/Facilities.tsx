@@ -26,7 +26,7 @@ const ITEMS = [
   { icon: Wifi, label: "高速Wi-Fi" },
   { icon: Gamepad2, label: "PS5" },
   { icon: Joystick, label: "Nintendo Switch" },
-  { icon: Monitor, label: "ゲーミングデスクトップPC" },
+  { icon: Monitor, label: "ゲーミングデスクトップPC ×5" },
   { icon: Cloud, label: "Steam" },
   { icon: Tv, label: "大型テレビ" },
   { icon: WashingMachine, label: "洗濯機" },
@@ -69,7 +69,7 @@ function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
 }
 
 const STATS = [
-  { to: 4, suffix: "室", label: "少人数制の個室" },
+  { to: 10, suffix: "室", label: "個室（2階建て）" },
   { to: 100, suffix: "%", label: "全室Wi-Fi・エアコン" },
   { to: 3, suffix: "機種", label: "Switch / PS5 / PC" },
   { to: 365, suffix: "日", label: "生活支援サポート" },

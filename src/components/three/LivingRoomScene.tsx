@@ -193,62 +193,71 @@ function TVSetup() {
   );
 }
 
+/* LAN-party style long desk with 5 full gaming desktop stations along the right wall */
+const STATION_OFFSETS = [-1.84, -0.92, 0, 0.92, 1.84];
+const STATION_COLORS = ["#22d3ee", "#8b5cf6", "#34d399", "#22d3ee", "#8b5cf6"];
+
 function GamingDesk() {
   return (
-    <group position={[3.1, 0, -0.8]} rotation={[0, -Math.PI / 2, 0]}>
-      {/* desk */}
+    <group position={[3.25, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
+      {/* long shared desk */}
       <mesh castShadow receiveShadow position={[0, 0.72, 0]}>
-        <boxGeometry args={[1.6, 0.05, 0.7]} />
+        <boxGeometry args={[4.7, 0.05, 0.7]} />
         <meshStandardMaterial color="#ffffff" roughness={0.35} />
       </mesh>
-      {[-0.72, 0.72].map((x) => (
+      {[-2.25, -0.75, 0.75, 2.25].map((x) => (
         <mesh key={x} castShadow position={[x, 0.36, 0]}>
           <boxGeometry args={[0.06, 0.72, 0.6]} />
           <meshStandardMaterial color="#e8eef5" roughness={0.5} />
         </mesh>
       ))}
-      {/* dual monitors */}
-      {[-0.36, 0.36].map((x) => (
-        <group key={x} position={[x, 1.05, -0.18]} rotation={[0, x > 0 ? -0.18 : 0.18, 0]}>
-          <mesh castShadow>
-            <boxGeometry args={[0.62, 0.38, 0.03]} />
-            <meshStandardMaterial color="#10151d" />
-          </mesh>
-          <mesh position={[0, 0, 0.017]}>
-            <planeGeometry args={[0.58, 0.34]} />
-            <meshStandardMaterial
-              color="#0b1526"
-              emissive={x > 0 ? "#8b5cf6" : "#22d3ee"}
-              emissiveIntensity={1.1}
-              toneMapped={false}
-            />
-          </mesh>
-          <mesh position={[0, -0.24, 0.05]}>
-            <cylinderGeometry args={[0.04, 0.09, 0.12, 10]} />
+      {/* LED strip under the desk edge */}
+      <RGBStrip position={[0, 0.69, 0.34]} size={[4.6, 0.02, 0.02]} speed={0.2} offset={0.4} />
+
+      {STATION_OFFSETS.map((x, i) => (
+        <group key={x} position={[x, 0, 0]}>
+          {/* monitor */}
+          <group position={[0, 1.05, -0.18]}>
+            <mesh castShadow>
+              <boxGeometry args={[0.62, 0.38, 0.03]} />
+              <meshStandardMaterial color="#10151d" />
+            </mesh>
+            <mesh position={[0, 0, 0.017]}>
+              <planeGeometry args={[0.58, 0.34]} />
+              <meshStandardMaterial
+                color="#0b1526"
+                emissive={STATION_COLORS[i]}
+                emissiveIntensity={1.1}
+                toneMapped={false}
+              />
+            </mesh>
+            <mesh position={[0, -0.24, 0.05]}>
+              <cylinderGeometry args={[0.04, 0.09, 0.12, 10]} />
+              <meshStandardMaterial color="#2a2f38" />
+            </mesh>
+          </group>
+          {/* desktop tower under the desk, RGB face toward the room */}
+          <group position={[0.32, 0.26, -0.08]}>
+            <mesh castShadow>
+              <boxGeometry args={[0.22, 0.48, 0.42]} />
+              <meshStandardMaterial color="#1a1f27" roughness={0.4} metalness={0.4} />
+            </mesh>
+            <RGBStrip position={[0, 0.1, 0.215]} size={[0.16, 0.05, 0.01]} speed={0.5} offset={i * 0.2} />
+            <RGBStrip position={[0, -0.1, 0.215]} size={[0.16, 0.05, 0.01]} speed={0.5} offset={i * 0.2 + 0.5} />
+          </group>
+          {/* keyboard */}
+          <mesh position={[0, 0.755, 0.08]}>
+            <boxGeometry args={[0.42, 0.02, 0.15]} />
             <meshStandardMaterial color="#2a2f38" />
           </mesh>
+          <RGBStrip position={[0, 0.768, 0.08]} size={[0.4, 0.005, 0.13]} speed={0.4} offset={i * 0.17} />
+          <GamingChair
+            position={[0, 0, 0.65]}
+            rotation={Math.PI}
+            accent={STATION_COLORS[i]}
+          />
         </group>
       ))}
-      {/* gaming desktop PC tower with RGB */}
-      <group position={[0.95, 0.28, 0.05]}>
-        <mesh castShadow>
-          <boxGeometry args={[0.24, 0.52, 0.48]} />
-          <meshStandardMaterial color="#1a1f27" roughness={0.4} metalness={0.4} />
-        </mesh>
-        <mesh position={[-0.121, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
-          <planeGeometry args={[0.44, 0.46]} />
-          <meshStandardMaterial color="#0d1117" metalness={0.6} roughness={0.2} />
-        </mesh>
-        <RGBStrip position={[-0.125, 0.1, 0]} size={[0.01, 0.06, 0.4]} speed={0.5} />
-        <RGBStrip position={[-0.125, -0.1, 0]} size={[0.01, 0.06, 0.4]} speed={0.5} offset={0.5} />
-      </group>
-      {/* keyboard */}
-      <mesh position={[0, 0.755, 0.08]}>
-        <boxGeometry args={[0.42, 0.02, 0.15]} />
-        <meshStandardMaterial color="#2a2f38" />
-      </mesh>
-      <RGBStrip position={[0, 0.768, 0.08]} size={[0.4, 0.005, 0.13]} speed={0.4} offset={0.2} />
-      <GamingChair position={[0, 0, 0.65]} rotation={Math.PI} accent="#8b5cf6" />
     </group>
   );
 }
@@ -362,14 +371,14 @@ function Scene() {
       <CoffeeTable />
       <Rug />
       <Plant position={[-3.5, 0, -2]} scale={1.4} />
-      <Plant position={[3.6, 0, 1.9]} scale={1.2} />
+      <Plant position={[2.3, 0, 2.1]} scale={1.2} />
       <Plant position={[-3.4, 0, 1.9]} scale={1} />
       <AirCon position={[2.2, 2.35, -D / 2 + 0.12]} />
 
       <Label position={[0, 2.5, -2.3]} text="大型テレビ &amp; RGBライト" />
       <Label position={[-1.15, 1.15, -2]} text="PS5" />
       <Label position={[1.1, 1.0, -2]} text="Nintendo Switch" />
-      <Label position={[3.1, 1.7, -0.8]} text="ゲーミングデスクトップPC" />
+      <Label position={[3.1, 1.8, 0]} text="ゲーミングデスクトップPC × 5" />
       <Label position={[0, 1.3, 1.4]} text="ソファ" />
       <Label position={[-3.5, 1.3, -2]} text="観葉植物" />
 

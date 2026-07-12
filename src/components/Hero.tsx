@@ -61,7 +61,7 @@ export default function Hero() {
             className="mt-1 text-2xl font-bold text-sky-900"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            4 / 4
+            10 / 10
           </p>
           <p className="text-[10px] text-slate-500">みんなでゲーム中…</p>
         </div>
