@@ -34,11 +34,10 @@ const FLOOR_2F: Area[] = [
   { id: "r6", label: "居室 6", sub: "洋室 6帖", x: 205, y: 20, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
   { id: "r7", label: "居室 7", sub: "洋室 6帖", x: 410, y: 20, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
   { id: "r8", label: "居室 8", sub: "洋室 6帖", x: 595, y: 20, w: 185, h: 165, href: "#room", accent: "#8b5cf6" },
-  { id: "r9", label: "居室 9", sub: "洋室 6帖", x: 20, y: 255, w: 175, h: 175, href: "#room", accent: "#8b5cf6" },
-  { id: "r10", label: "居室 10", sub: "洋室 6帖", x: 205, y: 255, w: 175, h: 175, href: "#room", accent: "#8b5cf6" },
-  { id: "free", label: "フリースペース", sub: "ミニ卓球・本棚", x: 410, y: 255, w: 175, h: 175, accent: "#34d399" },
-  { id: "wc2", label: "トイレ・洗面", x: 595, y: 255, w: 185, h: 175, accent: "#38bdf8" },
-  { id: "balcony", label: "バルコニー", x: 20, y: 440, w: 760, h: 60, accent: "#94a3b8" },
+  { id: "r9", label: "居室 9", sub: "洋室 6帖", x: 20, y: 255, w: 175, h: 245, href: "#room", accent: "#8b5cf6" },
+  { id: "r10", label: "居室 10", sub: "洋室 6帖", x: 205, y: 255, w: 175, h: 245, href: "#room", accent: "#8b5cf6" },
+  { id: "free", label: "フリースペース", sub: "ミニ卓球・本棚", x: 410, y: 255, w: 175, h: 245, accent: "#34d399" },
+  { id: "wc2", label: "トイレ・洗面", x: 595, y: 255, w: 185, h: 245, accent: "#38bdf8" },
 ];
 
 const BEDS_1F = [35, 220, 425, 610];
@@ -109,7 +108,7 @@ export default function FloorPlan() {
                 aria-label={
                   floor === 1
                     ? "1階の間取り図：居室4室、廊下、階段、LDK、キッチン、浴室、洗面・洗濯、トイレ、玄関"
-                    : "2階の間取り図：居室6室、廊下、階段、フリースペース、トイレ・洗面、バルコニー"
+                    : "2階の間取り図：居室6室、廊下、階段、フリースペース、トイレ・洗面"
                 }
               >
                 <defs>
@@ -252,8 +251,8 @@ export default function FloorPlan() {
                 ) : (
                   <g opacity="0.55">
                     {/* table in free space */}
-                    <rect x="455" y="310" width="85" height="46" rx="8" fill="none" stroke="#34d399" strokeWidth="1.5" />
-                    <line x1="497" y1="310" x2="497" y2="356" stroke="#34d399" strokeWidth="1.5" strokeDasharray="4 3" />
+                    <rect x="455" y="340" width="85" height="46" rx="8" fill="none" stroke="#34d399" strokeWidth="1.5" />
+                    <line x1="497" y1="340" x2="497" y2="386" stroke="#34d399" strokeWidth="1.5" strokeDasharray="4 3" />
                   </g>
                 )}
               </svg>
