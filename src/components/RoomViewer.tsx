@@ -115,7 +115,7 @@ export function RoomSection() {
         <SectionHeading
           eyebrow="3D Virtual Tour — Private Room"
           title="あなたの個室を、360°見渡す。"
-          lead="シングルベッド・白いデスク・ゲーミングチェア・PCモニター・LEDライト・収納・観葉植物。落ち着く照明の中で、部屋の真ん中から360°ぐるりと見渡せます。"
+          lead="シングルベッド・白いデスク・ゲーミングチェア・LEDライト・収納・観葉植物。落ち着く照明の中で、部屋の真ん中から360°ぐるりと見渡せます。"
         />
         <ViewerFrame
           scene="room"

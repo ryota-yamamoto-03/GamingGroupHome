@@ -192,31 +192,22 @@ function DeskSetup() {
           <meshStandardMaterial color="#eef3f8" roughness={0.5} />
         </mesh>
       ))}
-      {/* monitor */}
-      <group position={[0, 1.04, -0.15]}>
+      {/* desk lamp */}
+      <group position={[-0.45, 0.745, -0.18]}>
         <mesh castShadow>
-          <boxGeometry args={[0.68, 0.4, 0.03]} />
-          <meshStandardMaterial color="#10151d" />
+          <cylinderGeometry args={[0.07, 0.09, 0.03, 16]} />
+          <meshStandardMaterial color="#e8eef5" roughness={0.5} />
         </mesh>
-        <mesh position={[0, 0, 0.017]}>
-          <planeGeometry args={[0.64, 0.36]} />
-          <meshStandardMaterial
-            color="#0b1526"
-            emissive="#22d3ee"
-            emissiveIntensity={1}
-            toneMapped={false}
-          />
+        <mesh castShadow position={[0.05, 0.16, 0]} rotation={[0, 0, -0.5]}>
+          <cylinderGeometry args={[0.015, 0.015, 0.34, 8]} />
+          <meshStandardMaterial color="#cfdce8" metalness={0.4} />
         </mesh>
-        <mesh position={[0, -0.25, 0.05]}>
-          <cylinderGeometry args={[0.04, 0.09, 0.12, 10]} />
-          <meshStandardMaterial color="#2a2f38" />
+        <mesh castShadow position={[0.16, 0.3, 0]} rotation={[0, 0, 1.1]}>
+          <coneGeometry args={[0.07, 0.12, 16, 1, true]} />
+          <meshStandardMaterial color="#f4f7fa" roughness={0.6} side={2} />
         </mesh>
+        <pointLight position={[0.18, 0.26, 0]} intensity={0.9} color="#ffe8c4" distance={1.6} />
       </group>
-      {/* keyboard */}
-      <mesh position={[0, 0.755, 0.1]}>
-        <boxGeometry args={[0.38, 0.018, 0.13]} />
-        <meshStandardMaterial color="#2a2f38" />
-      </mesh>
       {/* LED strip behind desk (violet) */}
       <RGBStrip position={[0, 0.7, -0.31]} size={[1.36, 0.03, 0.03]} speed={0.15} offset={0.7} />
       <GamingChair position={[0, 0, 0.55]} rotation={Math.PI} accent="#22d3ee" />
@@ -337,7 +328,7 @@ function Scene() {
       <AirCon position={[0, 2.15, -D / 2 + 0.12]} />
 
       <Label position={[0.85, 1.1, -1.05]} text="シングルベッド" />
-      <Label position={[-1.25, 1.55, 0.85]} text="白いデスク &amp; PCモニター" />
+      <Label position={[-1.25, 1.55, 0.85]} text="白いデスク &amp; LEDライト" />
       <Label position={[-1.15, 1.0, 1.35]} text="ゲーミングチェア" />
       <Label position={[-1.35, 2.0, -1.2]} text="収納" />
       <Label position={[-1.6, 1.5, -0.4]} text="カーテン &amp; 窓" />
