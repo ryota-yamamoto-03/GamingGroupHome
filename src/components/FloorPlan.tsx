@@ -34,8 +34,9 @@ const FLOOR_2F: Area[] = [
   { id: "r6", label: "居室 6", sub: "洋室 6帖", x: 205, y: 20, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
   { id: "r7", label: "居室 7", sub: "洋室 6帖", x: 410, y: 20, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
   { id: "r8", label: "居室 8", sub: "洋室 6帖", x: 595, y: 20, w: 185, h: 165, href: "#room", accent: "#8b5cf6" },
-  { id: "r9", label: "居室 9", sub: "洋室 6帖", x: 20, y: 255, w: 175, h: 245, href: "#room", accent: "#8b5cf6" },
-  { id: "r10", label: "居室 10", sub: "洋室 6帖", x: 205, y: 255, w: 175, h: 245, href: "#room", accent: "#8b5cf6" },
+  { id: "r9", label: "居室 9", sub: "洋室 6帖", x: 20, y: 255, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
+  { id: "r10", label: "居室 10", sub: "洋室 6帖", x: 205, y: 255, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
+  { id: "storage2f", label: "収納・室内物干し", x: 20, y: 430, w: 360, h: 70, accent: "#94a3b8" },
   { id: "free", label: "フリースペース", sub: "ミニ卓球・本棚", x: 410, y: 255, w: 175, h: 245, href: "#freespace", accent: "#34d399" },
   { id: "wc2", label: "トイレ・洗面", x: 595, y: 255, w: 185, h: 245, accent: "#38bdf8" },
 ];
@@ -108,7 +109,7 @@ export default function FloorPlan() {
                 aria-label={
                   floor === 1
                     ? "1階の間取り図：居室4室、廊下、階段、LDK、キッチン、浴室、洗面・洗濯、トイレ、玄関"
-                    : "2階の間取り図：居室6室、廊下、階段、フリースペース、トイレ・洗面"
+                    : "2階の間取り図：居室6室、廊下、階段、フリースペース、トイレ・洗面、収納・室内物干し"
                 }
               >
                 <defs>
