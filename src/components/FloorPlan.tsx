@@ -14,36 +14,66 @@ type Area = {
   h: number;
   href?: string;
   accent: string;
+  room?: boolean;
 };
 
+/* ---- room grid geometry (viewBox 800 x 740) ---- */
+const COLS = [22, 172, 322, 472, 622]; // 5 columns
+const RW = 144;
+const RH = 130;
+const BAND_A_Y = 22;
+const BAND_B_Y = 192;
+const PURPLE = "#8b5cf6";
+
+/** build 10 居室 (2 bands of 5) for a floor, numbered from `start` */
+function buildRooms(start: number): Area[] {
+  const rooms: Area[] = [];
+  [BAND_A_Y, BAND_B_Y].forEach((y, band) => {
+    COLS.forEach((x, col) => {
+      const n = start + band * 5 + col;
+      rooms.push({
+        id: `r${n}`,
+        label: `居室 ${n}`,
+        sub: "洋室 6帖",
+        x,
+        y,
+        w: RW,
+        h: RH,
+        href: "#room",
+        accent: PURPLE,
+        room: true,
+      });
+    });
+  });
+  return rooms;
+}
+
 const FLOOR_1F: Area[] = [
-  { id: "r1", label: "居室 1", sub: "洋室 6帖", x: 20, y: 20, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
-  { id: "r2", label: "居室 2", sub: "洋室 6帖", x: 205, y: 20, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
-  { id: "r3", label: "居室 3", sub: "洋室 6帖", x: 410, y: 20, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
-  { id: "r4", label: "居室 4", sub: "洋室 6帖", x: 595, y: 20, w: 185, h: 165, href: "#room", accent: "#8b5cf6" },
-  { id: "ldk", label: "ゲーミングリビング", sub: "LDK 16帖", x: 20, y: 255, w: 420, h: 245, href: "#living", accent: "#06b6d4" },
-  { id: "kitchen", label: "キッチン", x: 450, y: 255, w: 150, h: 115, accent: "#34d399" },
-  { id: "bath", label: "浴室", x: 610, y: 255, w: 170, h: 115, accent: "#38bdf8" },
-  { id: "wash", label: "洗面・洗濯", x: 450, y: 380, w: 150, h: 120, accent: "#38bdf8" },
-  { id: "wc1", label: "トイレ", x: 610, y: 380, w: 80, h: 120, accent: "#38bdf8" },
-  { id: "entrance", label: "玄関", x: 700, y: 380, w: 80, h: 120, accent: "#94a3b8" },
+  ...buildRooms(1),
+  { id: "ldk", label: "ゲーミングリビング", sub: "共用 / LDK", x: 22, y: 362, w: 444, h: 366, href: "#living", accent: "#06b6d4" },
+  { id: "kitchen", label: "キッチン", x: 472, y: 362, w: 294, h: 114, accent: "#34d399" },
+  { id: "bath", label: "浴室", x: 472, y: 482, w: 144, h: 114, accent: "#38bdf8" },
+  { id: "wash", label: "洗面・洗濯", x: 622, y: 482, w: 144, h: 114, accent: "#38bdf8" },
+  { id: "wc1", label: "トイレ", x: 472, y: 602, w: 144, h: 126, accent: "#38bdf8" },
+  { id: "entrance", label: "玄関", x: 622, y: 602, w: 144, h: 126, accent: "#94a3b8" },
 ];
 
 const FLOOR_2F: Area[] = [
-  { id: "r5", label: "居室 5", sub: "洋室 6帖", x: 20, y: 20, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
-  { id: "r6", label: "居室 6", sub: "洋室 6帖", x: 205, y: 20, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
-  { id: "r7", label: "居室 7", sub: "洋室 6帖", x: 410, y: 20, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
-  { id: "r8", label: "居室 8", sub: "洋室 6帖", x: 595, y: 20, w: 185, h: 165, href: "#room", accent: "#8b5cf6" },
-  { id: "r9", label: "居室 9", sub: "洋室 6帖", x: 20, y: 255, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
-  { id: "r10", label: "居室 10", sub: "洋室 6帖", x: 205, y: 255, w: 175, h: 165, href: "#room", accent: "#8b5cf6" },
-  { id: "storage2f", label: "収納・室内物干し", x: 20, y: 430, w: 360, h: 70, accent: "#94a3b8" },
-  { id: "free", label: "フリースペース", sub: "ミニ卓球・本棚", x: 410, y: 255, w: 175, h: 245, href: "#freespace", accent: "#34d399" },
-  { id: "wc2", label: "トイレ・洗面", x: 595, y: 255, w: 185, h: 245, accent: "#38bdf8" },
+  ...buildRooms(11),
+  { id: "free", label: "フリースペース", sub: "卓球台・本棚", x: 22, y: 362, w: 444, h: 366, href: "#freespace", accent: "#34d399" },
+  { id: "wc2", label: "トイレ・洗面", x: 472, y: 362, w: 294, h: 174, accent: "#38bdf8" },
+  { id: "storage2f", label: "収納・室内物干し", x: 472, y: 542, w: 294, h: 186, accent: "#94a3b8" },
 ];
 
-const BEDS_1F = [35, 220, 425, 610];
-const BEDS_2F_TOP = [35, 220, 425, 610];
-const BEDS_2F_BOTTOM = [35, 220];
+/* ---- reusable bed glyph inside a room ---- */
+function Bed({ x, y }: { x: number; y: number }) {
+  return (
+    <g opacity="0.5" pointerEvents="none">
+      <rect x={x + 12} y={y + 12} width="32" height="52" rx="5" fill="none" stroke={PURPLE} strokeWidth="1.5" />
+      <rect x={x + 17} y={y + 17} width="22" height="13" rx="3" fill="none" stroke={PURPLE} strokeWidth="1.5" />
+    </g>
+  );
+}
 
 export default function FloorPlan() {
   const [hovered, setHovered] = useState<string | null>(null);
@@ -62,7 +92,7 @@ export default function FloorPlan() {
         <SectionHeading
           eyebrow="Floor Plan"
           title="間取り"
-          lead="2階建て・全10個室 ＋ 広々ゲーミングLDK。1F / 2F を切り替えて、居室・リビングをクリックすると3D内覧セクションへ移動します。"
+          lead="2階建て・全20個室 ＋ 共用のゲーミングフロア。1F / 2F を切り替えて、居室・リビング・フリースペースをクリックすると3D内覧セクションへ移動します。"
         />
 
         <motion.div
@@ -90,7 +120,9 @@ export default function FloorPlan() {
               </button>
             ))}
             <span className="ml-2 hidden text-xs text-slate-400 sm:inline">
-              {floor === 1 ? "共用フロア ＋ 居室1〜4" : "居室5〜10 ＋ フリースペース"}
+              {floor === 1
+                ? "共用フロア（ゲーミング部屋）＋ 居室1〜10"
+                : "フリースペース（卓球台など）＋ 居室11〜20"}
             </span>
           </div>
 
@@ -103,13 +135,13 @@ export default function FloorPlan() {
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
               <svg
-                viewBox="0 0 800 520"
+                viewBox="0 0 800 740"
                 className="w-full"
                 role="img"
                 aria-label={
                   floor === 1
-                    ? "1階の間取り図：居室4室、廊下、階段、LDK、キッチン、浴室、洗面・洗濯、トイレ、玄関"
-                    : "2階の間取り図：居室6室、廊下、階段、フリースペース、トイレ・洗面、収納・室内物干し"
+                    ? "1階の間取り図：共用ゲーミングリビング、居室1〜10、廊下、階段、キッチン、浴室、洗面・洗濯、トイレ、玄関"
+                    : "2階の間取り図：フリースペース（卓球台・本棚）、居室11〜20、廊下、階段、トイレ・洗面、収納・室内物干し"
                 }
               >
                 <defs>
@@ -119,28 +151,35 @@ export default function FloorPlan() {
                 </defs>
 
                 {/* outer wall */}
-                <rect x="12" y="12" width="776" height="496" rx="10" fill="none" stroke="#0f2a43" strokeWidth="7" />
-                {/* corridor */}
-                <rect x="20" y="190" width="655" height="60" fill="#eef6fd" />
-                <text x="360" y="226" textAnchor="middle" fontSize="15" fill="#7c93a8" letterSpacing="8">
+                <rect x="12" y="12" width="776" height="716" rx="10" fill="none" stroke="#0f2a43" strokeWidth="7" />
+
+                {/* corridors between the two room bands and the common zone */}
+                {[156, 326].map((cy) => (
+                  <rect key={cy} x="18" y={cy} width="764" height="32" fill="#eef6fd" />
+                ))}
+                <text x="300" y="178" textAnchor="middle" fontSize="14" fill="#7c93a8" letterSpacing="8">
                   廊下
                 </text>
-                {/* stairs (both floors) */}
+                <text x="300" y="348" textAnchor="middle" fontSize="14" fill="#7c93a8" letterSpacing="8">
+                  廊下
+                </text>
+
+                {/* stairs on the lower corridor */}
                 <g>
-                  <rect x="685" y="190" width="95" height="60" fill="#f3f0fb" stroke="#3c5a75" strokeWidth="2" />
+                  <rect x="672" y="326" width="110" height="32" fill="#f3f0fb" stroke="#3c5a75" strokeWidth="2" />
                   {[0, 1, 2, 3, 4].map((i) => (
                     <line
                       key={i}
-                      x1={697 + i * 15}
-                      y1="214"
-                      x2={697 + i * 15}
-                      y2="244"
+                      x1={700 + i * 15}
+                      y1="330"
+                      x2={700 + i * 15}
+                      y2="354"
                       stroke="#9f8fd0"
                       strokeWidth="2"
                     />
                   ))}
-                  <text x="732.5" y="206" textAnchor="middle" fontSize="11" fontWeight="600" fill="#7c93a8">
-                    階段（{floor === 1 ? "2Fへ" : "1Fへ"}）
+                  <text x="686" y="347" textAnchor="middle" fontSize="11" fontWeight="700" fill="#7c93a8">
+                    階段
                   </text>
                 </g>
 
@@ -165,95 +204,144 @@ export default function FloorPlan() {
                         strokeWidth={active && clickable ? 3 : 2}
                         filter={active && clickable ? "url(#roomGlow)" : undefined}
                       />
-                      <text
-                        x={a.x + a.w / 2}
-                        y={a.y + a.h / 2 - (a.sub ? 6 : -5)}
-                        textAnchor="middle"
-                        fontSize={a.w < 100 ? 13 : a.h < 80 ? 14 : 17}
-                        fontWeight="700"
-                        fill="#0f2a43"
-                      >
-                        {a.label}
-                      </text>
-                      {a.sub && (
-                        <text
-                          x={a.x + a.w / 2}
-                          y={a.y + a.h / 2 + 16}
-                          textAnchor="middle"
-                          fontSize="12"
-                          fill="#7c93a8"
-                        >
-                          {a.sub}
-                        </text>
-                      )}
-                      {clickable && (
-                        <text
-                          x={a.x + a.w / 2}
-                          y={a.y + a.h - 14}
-                          textAnchor="middle"
-                          fontSize="11"
-                          fontWeight="600"
-                          fill={a.accent}
-                          opacity={active ? 1 : 0.75}
-                        >
-                          ▶ 3D内覧へ
-                        </text>
+                      {a.room && <Bed x={a.x} y={a.y} />}
+
+                      {a.room ? (
+                        <>
+                          <text
+                            x={a.x + a.w / 2}
+                            y={a.y + 86}
+                            textAnchor="middle"
+                            fontSize="15"
+                            fontWeight="700"
+                            fill="#0f2a43"
+                          >
+                            {a.label}
+                          </text>
+                          <text
+                            x={a.x + a.w / 2}
+                            y={a.y + 103}
+                            textAnchor="middle"
+                            fontSize="11"
+                            fill="#7c93a8"
+                          >
+                            {a.sub}
+                          </text>
+                          <text
+                            x={a.x + a.w / 2}
+                            y={a.y + a.h - 12}
+                            textAnchor="middle"
+                            fontSize="10"
+                            fontWeight="600"
+                            fill={a.accent}
+                            opacity={active ? 1 : 0.75}
+                          >
+                            ▶ 3D内覧へ
+                          </text>
+                        </>
+                      ) : (
+                        (() => {
+                          // large clickable common areas (living / free space) carry
+                          // furniture glyphs, so anchor their label near the top
+                          const tall = clickable && a.h > 200;
+                          const labelY = tall ? a.y + 44 : a.y + a.h / 2 - (a.sub ? 6 : clickable ? -2 : 5);
+                          const subY = tall ? a.y + 62 : a.y + a.h / 2 + 16;
+                          return (
+                            <>
+                              <text
+                                x={a.x + a.w / 2}
+                                y={labelY}
+                                textAnchor="middle"
+                                fontSize={a.w < 160 ? 14 : 18}
+                                fontWeight="700"
+                                fill="#0f2a43"
+                              >
+                                {a.label}
+                              </text>
+                              {a.sub && (
+                                <text
+                                  x={a.x + a.w / 2}
+                                  y={subY}
+                                  textAnchor="middle"
+                                  fontSize="12"
+                                  fill="#7c93a8"
+                                >
+                                  {a.sub}
+                                </text>
+                              )}
+                              {clickable && (
+                                <text
+                                  x={a.x + a.w / 2}
+                                  y={a.y + a.h - 16}
+                                  textAnchor="middle"
+                                  fontSize="12"
+                                  fontWeight="600"
+                                  fill={a.accent}
+                                  opacity={active ? 1 : 0.8}
+                                >
+                                  ▶ 3D内覧へ
+                                </text>
+                              )}
+                            </>
+                          );
+                        })()
                       )}
                     </g>
                   );
                 })}
 
-                {/* bed glyphs */}
-                {(floor === 1 ? BEDS_1F : BEDS_2F_TOP).map((x) => (
-                  <g key={`t${x}`} opacity="0.5">
-                    <rect x={x} y={35} width="44" height="76" rx="6" fill="none" stroke="#8b5cf6" strokeWidth="1.5" />
-                    <rect x={x + 6} y={41} width="32" height="18" rx="4" fill="none" stroke="#8b5cf6" strokeWidth="1.5" />
-                  </g>
-                ))}
-                {floor === 2 &&
-                  BEDS_2F_BOTTOM.map((x) => (
-                    <g key={`b${x}`} opacity="0.5">
-                      <rect x={x} y={270} width="44" height="76" rx="6" fill="none" stroke="#8b5cf6" strokeWidth="1.5" />
-                      <rect x={x + 6} y={276} width="32" height="18" rx="4" fill="none" stroke="#8b5cf6" strokeWidth="1.5" />
-                    </g>
-                  ))}
-
+                {/* common-zone furniture glyphs */}
                 {floor === 1 ? (
-                  <>
-                    {/* sofa + TV + PC row glyphs in LDK */}
-                    <g opacity="0.55">
-                      <rect x="120" y="400" width="150" height="34" rx="8" fill="none" stroke="#06b6d4" strokeWidth="1.5" />
-                      <rect x="120" y="290" width="150" height="10" rx="3" fill="#06b6d4" />
-                      <text x="195" y="285" textAnchor="middle" fontSize="10" fill="#06b6d4">
-                        大型TV
-                      </text>
-                      {[0, 1, 2, 3, 4].map((i) => (
-                        <rect
-                          key={i}
-                          x={330 + i * 20}
-                          y="300"
-                          width="14"
-                          height="20"
-                          rx="3"
-                          fill="none"
-                          stroke="#06b6d4"
-                          strokeWidth="1.5"
-                        />
-                      ))}
-                      <text x="375" y="292" textAnchor="middle" fontSize="10" fill="#06b6d4">
-                        ゲーミングPC ×5
-                      </text>
-                    </g>
+                  <g opacity="0.55" pointerEvents="none">
+                    {/* big TV */}
+                    <rect x="140" y="470" width="210" height="12" rx="3" fill="#06b6d4" />
+                    <text x="245" y="462" textAnchor="middle" fontSize="11" fill="#06b6d4">
+                      大型TV
+                    </text>
+                    {/* 5 gaming PCs */}
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <rect
+                        key={i}
+                        x={150 + i * 42}
+                        y="520"
+                        width="18"
+                        height="26"
+                        rx="3"
+                        fill="none"
+                        stroke="#06b6d4"
+                        strokeWidth="1.5"
+                      />
+                    ))}
+                    <text x="245" y="512" textAnchor="middle" fontSize="11" fill="#06b6d4">
+                      ゲーミングPC ×5
+                    </text>
+                    {/* sofa */}
+                    <rect x="150" y="650" width="200" height="40" rx="12" fill="none" stroke="#06b6d4" strokeWidth="1.5" />
+                    <text x="250" y="700" textAnchor="middle" fontSize="11" fill="#06b6d4">
+                      ソファ
+                    </text>
                     {/* entrance arrow */}
-                    <text x="740" y="492" textAnchor="middle" fontSize="16" fill="#7c93a8">
+                    <text x="694" y="716" textAnchor="middle" fontSize="16" fill="#7c93a8">
                       ⬆
                     </text>
-                  </>
+                  </g>
                 ) : (
-                  <g opacity="0.55">
-                    {/* table in free space */}
-                    <rect x="455" y="340" width="85" height="46" rx="8" fill="none" stroke="#34d399" strokeWidth="1.5" />
-                    <line x1="497" y1="340" x2="497" y2="386" stroke="#34d399" strokeWidth="1.5" strokeDasharray="4 3" />
+                  <g opacity="0.55" pointerEvents="none">
+                    {/* ping-pong table */}
+                    <rect x="164" y="500" width="160" height="90" rx="8" fill="none" stroke="#34d399" strokeWidth="1.5" />
+                    <line x1="244" y1="500" x2="244" y2="590" stroke="#34d399" strokeWidth="1.5" strokeDasharray="5 4" />
+                    <line x1="164" y1="545" x2="324" y2="545" stroke="#34d399" strokeWidth="1" strokeDasharray="3 3" />
+                    <text x="244" y="492" textAnchor="middle" fontSize="11" fill="#34d399">
+                      卓球台
+                    </text>
+                    {/* bookshelf */}
+                    <rect x="360" y="470" width="80" height="120" rx="4" fill="none" stroke="#34d399" strokeWidth="1.5" />
+                    {[0, 1, 2].map((i) => (
+                      <line key={i} x1="360" y1={510 + i * 30} x2="440" y2={510 + i * 30} stroke="#34d399" strokeWidth="1" />
+                    ))}
+                    <text x="400" y="462" textAnchor="middle" fontSize="11" fill="#34d399">
+                      本棚
+                    </text>
                   </g>
                 )}
               </svg>
